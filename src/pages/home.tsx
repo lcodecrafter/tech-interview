@@ -1,8 +1,17 @@
+import { Header } from '@src/components/header'
+import { OompaList } from '@src/components/oompa-list'
+
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-red-600">Home</h1>
-      <p>Welcome to the Home page</p>
-    </div>
+    <>
+      <Header />
+      <main className="px-20">
+        <div className=" text-center py-16">
+          <h2 className="text-5xl mb-2">Find your Oompa Loompa</h2>
+          <p className="text-4xl text-gray-500">There are more than 100k</p>
+        </div>
+        <OompaList />
+      </main>
+    </>
   )
 }
