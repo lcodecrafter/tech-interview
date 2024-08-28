@@ -1,6 +1,6 @@
 import { Header } from '@src/components/header'
-import { OompaList } from '@src/components/oompa-list'
-import { SearchBar } from '@src/components/searchBar'
+import { OompaList } from './components/oompa-list'
+import { SearchBar } from './components/searchBar'
 
 export default function Home() {
   return (

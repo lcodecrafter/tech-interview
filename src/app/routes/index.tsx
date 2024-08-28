@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from '@src/pages/home'
-import Details from '@src/pages/details'
+import Home from '@src/views/home'
+import Details from '@src/views/detail'
 
 const AppRoutes = () => (
   <Router>
