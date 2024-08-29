@@ -1,10 +1,22 @@
-import oompas from '@src/app/store/oompas.json'
+import { AppDispatch } from '@src/app/store'
+
+import { fetchOompaLoompas } from '@src/app/store/oompasThunk'
+import { selectFilteredOompas } from '@src/app/store/selectors'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export function OompaList() {
+  const dispatch = useDispatch<AppDispatch>()
+  const oompas = useSelector(selectFilteredOompas)
+
+  useEffect(() => {
+    dispatch(fetchOompaLoompas())
+  }, [dispatch])
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
-      {oompas.results.map((oompa) => {
+      {oompas.map((oompa) => {
         return (
           <div className="flex flex-col items-start leading-4" key={oompa.id}>
             <div className="max-h-[13.5rem] overflow-hidden mb-5">

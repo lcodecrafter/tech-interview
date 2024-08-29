@@ -3,15 +3,20 @@ import loupeIcon from '@src/assets/ic_search.png'
 import { useSearchBar } from './useSearchBar'
 import oompas from '@src/app/store/oompas.json'
 import { Oompas } from '@src/types/oompas'
+import { RootState } from '@src/app/store'
+import { useSelector } from 'react-redux'
 
 export function SearchBar() {
   const { filterResults } = useSearchBar()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(
-      event.target.value,
-      filterResults(oompas.results as Oompas, event.target.value),
-    )
+    console.log(event.target.value)
+    filterResults(oompas.results as Oompas, event.target.value)
   }
+  const { filteredOompas } = useSelector(
+    (state: RootState) => state.oompaLoompas,
+  )
+
+  console.log(filteredOompas)
 
   return (
     <div className="h-9 w-52 mt-7 flex justify-center ml-auto p-2 border rounded-lg border-gray-400">

@@ -5,7 +5,7 @@ interface Favorite {
   song: string
 }
 
-export type Oompas = {
+export interface Oompa {
   first_name: string
   last_name: string
   favorite: Favorite
@@ -17,4 +17,6 @@ export type Oompas = {
   country: string
   height: number
   id: number
-}[]
+}
+
+export type Oompas = Oompa[]
