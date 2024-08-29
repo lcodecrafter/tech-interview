@@ -1,9 +1,16 @@
 import React from 'react'
 import loupeIcon from '@src/assets/ic_search.png'
+import { useSearchBar } from './useSearchBar'
+import oompas from '@src/app/store/oompas.json'
+import { Oompas } from '@src/types/oompas'
 
 export function SearchBar() {
+  const { filterResults } = useSearchBar()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
+    console.log(
+      event.target.value,
+      filterResults(oompas.results as Oompas, event.target.value),
+    )
   }
 
   return (

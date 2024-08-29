@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 export function OompaList() {
   return (
-    <div className="grid grid-cols-3 gap-5 gap-y-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
       {oompas.results.map((oompa) => {
         return (
-          <div className="flex flex-col items-start leading-4">
-            <div key={oompa.id} className="h-[13.5rem] overflow-hidden mb-5">
+          <div className="flex flex-col items-start leading-4" key={oompa.id}>
+            <div className="max-h-[13.5rem] overflow-hidden mb-5">
               <img src={oompa.image} alt={oompa.first_name} />
             </div>
 
