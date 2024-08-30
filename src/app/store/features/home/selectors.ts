@@ -1,8 +1,7 @@
-// oompasSelectors.ts
 import { createSelector } from '@reduxjs/toolkit'
-import { RootState } from './index'
+import { RootState } from '@src/app/store'
 
-const selectOompasState = (state: RootState) => state.oompaLoompas
+const selectOompasState = (state: RootState) => state.home
 
 export const selectFilteredOompas = createSelector(
   [selectOompasState],

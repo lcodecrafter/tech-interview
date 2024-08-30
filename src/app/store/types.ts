@@ -1,7 +1,7 @@
 import { Oompa } from '@src/types/oompa'
 import { Oompas } from '@src/types/oompas'
 
-interface AsyncState<T> {
+export interface AsyncState<T> {
   value: T
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error?: string | null

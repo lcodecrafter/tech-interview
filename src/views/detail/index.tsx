@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@src/app/store'
 import { useEffect } from 'react'
-import { fetchOompaDetails } from '@src/app/store/oompasThunk'
+import { fetchOompaDetails } from '@src/app/store/features/details/asyncThunk'
 import DOMPurify from 'dompurify'
 
 export default function Details() {
@@ -11,7 +11,7 @@ export default function Details() {
 
   const dispatch = useDispatch<AppDispatch>()
   const oompa = useSelector(
-    (state: RootState) => state.oompaLoompas.oompaDetails.value,
+    (state: RootState) => state.details.oompaDetails.value,
   )
 
   const sanitizedDescription = DOMPurify.sanitize(oompa?.description)

@@ -1,7 +1,7 @@
 import { AppDispatch } from '@src/app/store'
 
-import { fetchOompaLoompas } from '@src/app/store/oompasThunk'
-import { selectFilteredOompas } from '@src/app/store/selectors'
+import { fetchOompaLoompas } from '@src/app/store/features/home/oompasThunk'
+import { selectFilteredOompas } from '@src/app/store/features/home/selectors'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'

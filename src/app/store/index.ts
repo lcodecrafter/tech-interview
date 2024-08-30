@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import oompaLoompaReducer from './oompasSlice'
+import oompaList from './features/home/oompasSlice'
+import oompaDetails from './features/details/oompasSlice'
 
 export const store = configureStore({
   reducer: {
-    oompaLoompas: oompaLoompaReducer,
+    home: oompaList,
+    details: oompaDetails,
   },
 })
 
