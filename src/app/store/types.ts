@@ -5,6 +5,7 @@ interface AsyncState<T> {
   value: T
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error?: string | null
+  lastFetched: null | number
 }
 
 export interface OompaState {

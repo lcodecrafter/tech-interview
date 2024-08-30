@@ -9,12 +9,14 @@ const initialState: OompaState = {
     value: [],
     status: 'idle',
     error: null,
+    lastFetched: null,
   },
   filteredOompas: [],
   oompaDetails: {
     value: {} as Oompa,
     status: 'idle',
     error: null,
+    lastFetched: null,
   },
 }
 
@@ -36,6 +38,7 @@ const oompasSlice = createSlice({
         (state, action: PayloadAction<Oompas>) => {
           state.oompas.value = action.payload
           state.oompas.status = 'succeeded'
+          state.oompas.lastFetched = Date.now()
         },
       )
       .addCase(fetchOompaLoompas.rejected, (state, action) => {
@@ -50,6 +53,7 @@ const oompasSlice = createSlice({
         (state, action: PayloadAction<Oompa>) => {
           state.oompaDetails.value = action.payload
           state.oompaDetails.status = 'succeeded'
+          state.oompaDetails.lastFetched = Date.now()
         },
       )
       .addCase(fetchOompaDetails.rejected, (state, action) => {
