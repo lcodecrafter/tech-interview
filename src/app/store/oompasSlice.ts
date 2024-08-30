@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Oompas } from '@src/types/oompas'
-import { fetchOompaLoompas } from './oompasThunk'
-
-export interface OompaState {
-  oompas: {
-    value: Oompas
-    status: 'idle' | 'loading' | 'succeeded' | 'failed'
-    error?: string | null
-  }
-  filteredOompas: Oompas
-}
+import { fetchOompaDetails, fetchOompaLoompas } from './oompasThunk'
+import { Oompa } from '@src/types/oompa'
+import { OompaState } from './types'
 
 const initialState: OompaState = {
   oompas: {
@@ -18,6 +11,11 @@ const initialState: OompaState = {
     error: null,
   },
   filteredOompas: [],
+  oompaDetails: {
+    value: {} as Oompa,
+    status: 'idle',
+    error: null,
+  },
 }
 
 const oompasSlice = createSlice({
@@ -43,6 +41,20 @@ const oompasSlice = createSlice({
       .addCase(fetchOompaLoompas.rejected, (state, action) => {
         state.oompas.status = 'failed'
         state.oompas.error = action.error.message
+      })
+      .addCase(fetchOompaDetails.pending, (state) => {
+        state.oompaDetails.status = 'loading'
+      })
+      .addCase(
+        fetchOompaDetails.fulfilled,
+        (state, action: PayloadAction<Oompa>) => {
+          state.oompaDetails.value = action.payload
+          state.oompaDetails.status = 'succeeded'
+        },
+      )
+      .addCase(fetchOompaDetails.rejected, (state, action) => {
+        state.oompaDetails.status = 'failed'
+        state.oompaDetails.error = action.error.message
       })
   },
 })

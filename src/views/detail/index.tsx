@@ -1,9 +1,24 @@
 import { Header } from '@src/components/header'
 import { useParams } from 'react-router-dom'
-import oompa from '@src/app/store/oompa.json'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@src/app/store'
+import { useEffect } from 'react'
+import { fetchOompaDetails } from '@src/app/store/oompasThunk'
+import DOMPurify from 'dompurify'
 
 export default function Details() {
   const { id } = useParams()
+
+  const dispatch = useDispatch<AppDispatch>()
+  const oompa = useSelector(
+    (state: RootState) => state.oompaLoompas.oompaDetails.value,
+  )
+
+  const sanitizedDescription = DOMPurify.sanitize(oompa?.description)
+
+  useEffect(() => {
+    if (id) dispatch(fetchOompaDetails(id))
+  }, [dispatch])
 
   return (
     <div>
@@ -21,7 +36,7 @@ export default function Details() {
             <h2 className="font-bold ">{oompa.first_name}</h2>
             <p className="text-gray-400">{oompa.gender}</p>
             <p className="mb-5 text-gray-400">{oompa.profession}</p>
-            <p>{oompa.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
           </div>
         </div>
       </main>
