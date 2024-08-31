@@ -5,21 +5,28 @@ import { AppDispatch, RootState } from '@src/app/store'
 import { useEffect } from 'react'
 import { fetchOompaDetails } from '@src/app/store/features/details/asyncThunk'
 import DOMPurify from 'dompurify'
+import { OompaDiccionaryItem } from '@src/app/store/features/details/types'
 
 export default function Details() {
   const { id } = useParams()
+  let oompa = {} as OompaDiccionaryItem
+  let sanitizedDescription = ''
 
   const dispatch = useDispatch<AppDispatch>()
-  const oompa = useSelector(
+  const oompas = useSelector(
     (state: RootState) => state.details.oompaDetails.value,
   )
 
-  const sanitizedDescription = DOMPurify.sanitize(oompa?.description)
+  if (id && oompas[id]) {
+    oompa = oompas[id]
+    sanitizedDescription = DOMPurify.sanitize(oompa?.description)
+  }
 
   useEffect(() => {
     if (id) dispatch(fetchOompaDetails(id))
-  }, [dispatch])
+  }, [dispatch, id])
 
+  // If the oompa is not found, we can show a 404 page
   return (
     <div>
       <Header />

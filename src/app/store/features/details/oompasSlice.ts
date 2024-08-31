@@ -1,14 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchOompaDetails } from './asyncThunk'
-import { Oompa } from '@src/types/oompa'
-import { OompaDetailsState } from './types'
+import { OompaDetailsState, OompaDiccionary } from './types'
 
 const initialState: OompaDetailsState = {
   oompaDetails: {
-    value: {} as Oompa,
+    value: {},
     status: 'idle',
     error: null,
-    lastFetched: null,
   },
 }
 
@@ -23,10 +21,12 @@ const oompaDetailsSlice = createSlice({
       })
       .addCase(
         fetchOompaDetails.fulfilled,
-        (state, action: PayloadAction<Oompa>) => {
-          state.oompaDetails.value = action.payload
+        (state, action: PayloadAction<OompaDiccionary>) => {
+          state.oompaDetails.value = {
+            ...state.oompaDetails.value,
+            ...action.payload,
+          }
           state.oompaDetails.status = 'succeeded'
-          state.oompaDetails.lastFetched = Date.now()
         },
       )
       .addCase(fetchOompaDetails.rejected, (state, action) => {
