@@ -9,15 +9,17 @@ export function SearchBar() {
   }
 
   return (
-    <div className="h-9 w-52 mt-7 flex justify-center ml-auto p-2 border rounded-lg border-gray-400">
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={handleInputChange}
-        className="w-full placeholder-black outline-none"
-      />
-      <div className="w-[1px] h-full mx-2 bg-gray-400"></div>
-      <img src={loupeIcon} alt="search icon" />
+    <div className="flex justify-center lg:justify-end">
+      <div className="h-9 w-52 mt-7 flex justify-center p-2 border rounded-lg border-gray-400">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={handleInputChange}
+          className="w-full placeholder-black outline-none"
+        />
+        <div className="w-[1px] h-full mx-2 bg-gray-400"></div>
+        <img src={loupeIcon} alt="search icon" />
+      </div>
     </div>
   )
 }
