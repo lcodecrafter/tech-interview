@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Oompas } from '@src/types/oompas'
+import { Oompas, OompasWithPage } from '@src/types/oompas'
 import { fetchOompaLoompas } from './oompasThunk'
 import { OompaListState } from './types'
 
@@ -9,6 +9,7 @@ const initialState: OompaListState = {
     status: 'idle',
     error: null,
     lastFetched: null,
+    currentPage: 0,
   },
   filteredOompas: [],
 }
@@ -25,13 +26,19 @@ const oompasSlice = createSlice({
     builder
       .addCase(fetchOompaLoompas.pending, (state) => {
         state.oompas.status = 'loading'
+        console.log('Feching oompas...')
       })
       .addCase(
         fetchOompaLoompas.fulfilled,
-        (state, action: PayloadAction<Oompas>) => {
-          state.oompas.value = action.payload
+        (state, action: PayloadAction<OompasWithPage>) => {
           state.oompas.status = 'succeeded'
           state.oompas.lastFetched = Date.now()
+          state.oompas.value =
+            action.payload.page > state.oompas.currentPage
+              ? [...state.oompas.value, ...action.payload.oompas]
+              : state.oompas.value
+
+          state.oompas.currentPage = action.payload.page
         },
       )
       .addCase(fetchOompaLoompas.rejected, (state, action) => {

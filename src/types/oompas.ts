@@ -20,3 +20,8 @@ export interface Oompa {
 }
 
 export type Oompas = Oompa[]
+
+export interface OompasWithPage {
+  oompas: Oompas
+  page: number
+}
