@@ -1,11 +1,10 @@
-import { Header } from '@src/components/header'
 import { OompaList } from './components/oompaList'
 import { SearchBar } from './components/searchBar'
+import { BaseLayout } from '@src/layouts/base'
 
 export default function Home() {
   return (
-    <>
-      <Header />
+    <BaseLayout>
       <main className="px-20">
         <SearchBar />
         <div className=" text-center py-16">
@@ -16,6 +15,6 @@ export default function Home() {
         </div>
         <OompaList />
       </main>
-    </>
+    </BaseLayout>
   )
 }
